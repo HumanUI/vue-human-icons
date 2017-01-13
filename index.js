@@ -1,15 +1,31 @@
 const fs = require("fs");
-const cheerio = require('cheerio');
-const lodash = require('lodash');
+const path = require('path');
 
 /**
  * Files name list in some folder
  * @return {Array}
  */
+
 function getFilesname () {
-  // 仅读取 .svg 文件
-  return lodash.filter(fs.readdirSync('svg'), (file) => {
+  // 读取 .svg 文件
+  let files = []
+  travel('svg', function(pathname) {
+    files.push(pathname)
+  })
+  return files.filter(function (file) {
     return /.svg$/.test(file)
+  });
+}
+
+function travel(dir, callback) {
+  fs.readdirSync(dir).forEach(function (file) {
+    var pathname = path.join(dir, file);
+
+    if (fs.statSync(pathname).isDirectory()) {
+      travel(pathname, callback);
+    } else {
+      callback(pathname);
+    }
   });
 }
 
@@ -19,42 +35,33 @@ function getFilesname () {
  * @return {String}
  */
 function parseFile (fileName) {
-  let paths = '';
-
-  let html = fs.readFileSync(`svg/${fileName}`, 'utf8')
-  let $ = cheerio.load(html)
-	$('svg > path').each((index, element) => {
-	  let path = $(element).attr('d');
-	  paths += '<path d="'+path+'"></path>'
-	});
-  return 'export default `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">'+paths+'</svg>`';
+  let text = fs.readFileSync(fileName, 'utf8')
+  text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6).replace(/width=".*" | height=".*"/, '')
+  return 'export default `'+text+'`'
 }
-
 /**
  * Write js to file
  * @param {String} fileName
  * @param {String} js
  */
 function writeFile (fileName, js) {
-  fs.open(`dist/all/${fileName}.js`, 'a', function (err, fd) {
+  console.log(fileName)
+  fileName = fileName.replace(/.svg$/, '.js').slice(4)
+  if (fileName.lastIndexOf('\/') !== -1) {
+    var dir = fileName.slice(0, fileName.lastIndexOf('\/'))
+    if (!fs.existsSync(`dist/${dir}/`)) {
+      fs.mkdirSync(`dist/${dir}`,0744);
+    }
+  }
+  fs.open(`dist/${fileName}`, 'a', function (err, fd) {
     var writeBuffer = new Buffer(js),
       offset = 0,
       len = writeBuffer.length,
       filePostion = null;
 
-    fs.write(fd, writeBuffer, offset, len, filePostion, function(err, readByte){
-      console.log('写数据总数：'+readByte+' bytes' );		
+    fs.writeFile(fd, writeBuffer, offset, len, filePostion, function(err, readByte){		
     })
   })
-}
-
-/**
- * Remove file name `.svg` suffix
- * @param  {String} fileName
- * @return {String}
- */
-function getFileTitle (fileName) {
-  return fileName.slice(0, fileName.indexOf('.svg'));
 }
 
 /**
@@ -63,9 +70,8 @@ function getFileTitle (fileName) {
 function handleSvgFile () {
   const files = getFilesname()
   files.forEach(fileName => {
-    const title = getFileTitle(fileName)
     const js = parseFile(fileName)
-    writeFile(title, js)
+    writeFile(fileName, js)
   })
   console.log('完成')
 }
