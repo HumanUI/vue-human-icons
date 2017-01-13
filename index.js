@@ -38,14 +38,14 @@ function parseFile (fileName) {
 function writeFile (fileName, js) {
   fs.open(`dist/all/${fileName}.js`, 'a', function (err, fd) {
     var writeBuffer = new Buffer(js),
-			offset = 0,
-			len = writeBuffer.length,
-			filePostion = null;
+      offset = 0,
+      len = writeBuffer.length,
+      filePostion = null;
 
-	  fs.write(fd, writeBuffer, offset, len, filePostion, function(err, readByte){
-			console.log('写数据总数：'+readByte+' bytes' );		
-	   })
-	})
+    fs.write(fd, writeBuffer, offset, len, filePostion, function(err, readByte){
+      console.log('写数据总数：'+readByte+' bytes' );		
+    })
+  })
 }
 
 /**
