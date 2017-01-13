@@ -1,0 +1,15 @@
+{
+  "name": "svg2js",
+  "version": "1.0.0",
+  "description": "svg2js",
+  "scripts": {
+    "all": "node index.js"
+  },
+  "author": "weiwei",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "lodash": "^4.16.4",
+    "svgfont2js": "^0.1.2"
+  }
+}
