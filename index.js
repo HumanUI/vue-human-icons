@@ -45,7 +45,6 @@ function parseFile (fileName) {
  * @param {String} js
  */
 function writeFile (fileName, js) {
-  console.log(fileName)
   fileName = fileName.replace(/.svg$/, '.js').slice(4)
   if (fileName.lastIndexOf('\/') !== -1) {
     var dir = fileName.slice(0, fileName.lastIndexOf('\/'))
@@ -60,6 +59,7 @@ function writeFile (fileName, js) {
       filePostion = null;
 
     fs.writeFile(fd, writeBuffer, offset, len, filePostion, function(err, readByte){		
+      console.log(`${fileName} 创建成功`)
     })
   })
 }
