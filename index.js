@@ -17,6 +17,10 @@ function getFilesname () {
   });
 }
 
+/**
+ * Traversal folder
+ */
+
 function travel(dir, callback) {
   fs.readdirSync(dir).forEach(function (file) {
     var pathname = path.join(dir, file);
@@ -27,6 +31,22 @@ function travel(dir, callback) {
       callback(pathname);
     }
   });
+}
+
+/**
+ * Check folder and mkdir
+ */
+function check(fileName, fromIndex) {
+  var index = fileName.indexOf('\/', fromIndex)
+  if (index !== -1) {
+    var folderName = fileName.slice(0, index)
+    if (!fs.existsSync(`dist/${folderName}/`)) {
+      fs.mkdirSync(`dist/${folderName}`,0744);
+    }
+    check(fileName, fromIndex + 1);
+  } else {
+    return
+  }
 }
 
 /**
@@ -46,12 +66,7 @@ function parseFile (fileName) {
  */
 function writeFile (fileName, js) {
   fileName = fileName.replace(/.svg$/, '.js').slice(4)
-  if (fileName.lastIndexOf('\/') !== -1) {
-    var dir = fileName.slice(0, fileName.lastIndexOf('\/'))
-    if (!fs.existsSync(`dist/${dir}/`)) {
-      fs.mkdirSync(`dist/${dir}`,0744);
-    }
-  }
+  check(fileName, 0)
   fs.open(`dist/${fileName}`, 'a', function (err, fd) {
     var writeBuffer = new Buffer(js),
       offset = 0,
