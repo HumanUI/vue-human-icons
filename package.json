@@ -12,8 +12,6 @@
     "svg"
   ],
   "devDependencies": {
-    "cheerio": "^0.22.0",
-    "lodash": "^4.16.4",
     "svgfont2js": "^0.1.2"
   }
 }
