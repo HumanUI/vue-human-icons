@@ -19,9 +19,11 @@ function getFilesname () {
 
 /**
  * Traversal folder
+ * @param  {String} dir
+ * @param  {Function} callback
  */
 
-function travel(dir, callback) {
+function travel (dir, callback) {
   fs.readdirSync(dir).forEach(function (file) {
     var pathname = path.join(dir, file);
 
@@ -35,8 +37,10 @@ function travel(dir, callback) {
 
 /**
  * Check folder and mkdir
+ * @param  {String} fileName
+ * @param  {Number} fromIndex
  */
-function check(fileName, fromIndex) {
+function check (fileName, fromIndex) {
   var index = fileName.indexOf('\/', fromIndex)
   if (index !== -1) {
     var folderName = fileName.slice(0, index)
@@ -59,6 +63,7 @@ function parseFile (fileName) {
   text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6).replace(/width=".*" | height=".*"/, '')
   return 'export default `'+text+'`'
 }
+
 /**
  * Write js to file
  * @param {String} fileName
