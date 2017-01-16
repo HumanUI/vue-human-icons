@@ -12,5 +12,5 @@ npm install
 # Step 3. run script
 node index.js
 
-# Step 4. find file from `./dist/all`
+# Step 4. find files from `./dist`
 ```
