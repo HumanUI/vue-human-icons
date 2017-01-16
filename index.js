@@ -43,7 +43,7 @@ function check(fileName, fromIndex) {
     if (!fs.existsSync(`dist/${folderName}/`)) {
       fs.mkdirSync(`dist/${folderName}`,0744);
     }
-    check(fileName, fromIndex + 1);
+    check(fileName, index + 1);
   } else {
     return
   }
