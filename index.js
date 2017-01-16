@@ -9,7 +9,8 @@ const path = require('path');
 function getFilesname () {
   // 读取 .svg 文件
   let files = []
-  travel('svg', function(pathname) {
+  let dirs = []
+  travel('svg', dirs, function(pathname) {
     files.push(pathname)
   })
   return files.filter(function (file) {
@@ -23,12 +24,13 @@ function getFilesname () {
  * @param  {Function} callback
  */
 
-function travel (dir, callback) {
+function travel (dir, dirs, callback) {
   fs.readdirSync(dir).forEach(function (file) {
     var pathname = path.join(dir, file);
 
     if (fs.statSync(pathname).isDirectory()) {
-      travel(pathname, callback);
+      dirs.unshift(pathname)
+      travel(pathname, dirs, callback);
     } else {
       callback(pathname);
     }
@@ -83,6 +85,21 @@ function writeFile (fileName, js) {
     })
   })
 }
+/**
+ * Empty './js' Folder
+ */
+
+function empty () {
+  if (fs.existsSync('js')) {
+    let dirs = []
+    travel('js', dirs, function(pathname) {
+      fs.unlinkSync(pathname)
+    })
+    for (let i = 0; i < dirs.length; i ++) {
+      fs.rmdirSync(dirs[i])
+    }
+  }
+}
 
 /**
  * Handle svg file to write js
@@ -99,4 +116,5 @@ function handleSvgFile () {
   console.log('完成')
 }
 
+empty()
 handleSvgFile()
