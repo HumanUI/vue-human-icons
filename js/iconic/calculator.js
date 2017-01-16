@@ -1,0 +1,3 @@
+export default `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+<path fill="#000" d="M25 2h-18c-0.55 0-1 0.45-1 1v26c0 0.55 0.45 1 1 1h18c0.55 0 1-0.45 1-1v-26c0-0.55-0.45-1-1-1zM9 13h2v2h-2v-2zM9 17h2v2h-2v-2zM9 21h2v2h-2v-2zM15 27h-6v-2h6v2zM15 23h-2v-2h2v2zM15 19h-2v-2h2v2zM15 15h-2v-2h2v2zM19 27h-2v-2h2v2zM19 23h-2v-2h2v2zM19 19h-2v-2h2v2zM19 15h-2v-2h2v2zM23 27h-2v-6h2v6zM23 19h-2v-2h2v2zM23 15h-2v-2h2v2zM23 10h-14v-5h14v5z"></path>
+</svg>`
