@@ -36,5 +36,5 @@ yarn install
 # Step 2. Run script and to convert svg file to javascript file
 node index.js
 
-# Step 4. Find js files from `./js`
+# Step 3. Find js files from `./js`
 ```
