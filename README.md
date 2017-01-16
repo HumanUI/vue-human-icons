@@ -1,16 +1,40 @@
-# Convert SVG to JS for vue-human
+# Human svg icon from iconic
+### Provide two versions, they are SVG and JS string.
 
 The tool is just designed for vue-human.
 
+## Usage
+
+``` vue
+<template>
+  <div>
+    <!-- mn-icon component from vue-human -->
+    <mn-icon :name="iosAt"></mn-icon>
+  </div>
+</template>
+
+<script>
+  import iosAt from 'human-icons/js/ios/ios-at'
+
+  export default {
+    data () {
+      return {
+        iosAt
+      }
+    }
+  }
+</script>
+```
+
+## Build
+
 ``` bash
 
-# Step 1. install
-npm install
+# Step 1. Install
+yarn install
 
-# Step 2. Add SVG file to `./svg` folder
-
-# Step 3. run script
+# Step 2. Run script and to convert svg file to javascript file
 node index.js
 
-# Step 4. find files from `./dist`
+# Step 4. Find js files from `./js`
 ```
