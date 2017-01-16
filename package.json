@@ -1,12 +1,16 @@
 {
-  "name": "svg2js",
+  "name": "human-icons",
   "version": "1.0.0",
-  "description": "svg2js",
+  "description": "SVG icons for Human UI in Vue2",
   "scripts": {
-    "all": "node index.js"
+    "build": "node index.js"
   },
-  "author": "weiwei",
+  "author": "weiwei <weiwei@suiyi.com.cn>",
   "license": "ISC",
+  "files": [
+    "js",
+    "svg"
+  ],
   "dependencies": {
     "cheerio": "^0.22.0",
     "lodash": "^4.16.4",
