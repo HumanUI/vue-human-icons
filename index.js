@@ -44,8 +44,8 @@ function check (fileName, fromIndex) {
   var index = fileName.indexOf('\/', fromIndex)
   if (index !== -1) {
     var folderName = fileName.slice(0, index)
-    if (!fs.existsSync(`dist/${folderName}/`)) {
-      fs.mkdirSync(`dist/${folderName}`,0744);
+    if (!fs.existsSync(`js/${folderName}/`)) {
+      fs.mkdirSync(`js/${folderName}`,0744);
     }
     check(fileName, index + 1);
   } else {
@@ -72,13 +72,13 @@ function parseFile (fileName) {
 function writeFile (fileName, js) {
   fileName = fileName.replace(/.svg$/, '.js').slice(4)
   check(fileName, 0)
-  fs.open(`dist/${fileName}`, 'a', function (err, fd) {
+  fs.open(`js/${fileName}`, 'a', function (err, fd) {
     var writeBuffer = new Buffer(js),
       offset = 0,
       len = writeBuffer.length,
       filePostion = null;
 
-    fs.writeFile(fd, writeBuffer, offset, len, filePostion, function(err, readByte){		
+    fs.writeFile(fd, writeBuffer, offset, len, filePostion, function(err, readByte){
       console.log(`${fileName} 创建成功`)
     })
   })
@@ -89,8 +89,8 @@ function writeFile (fileName, js) {
  */
 function handleSvgFile () {
   const files = getFilesname()
-  if (!fs.existsSync('dist')) {
-    fs.mkdirSync('dist',0744);
+  if (!fs.existsSync('js')) {
+    fs.mkdirSync('js',0744);
   }
   files.forEach(fileName => {
     const js = parseFile(fileName)
