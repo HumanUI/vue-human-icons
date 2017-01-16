@@ -69,6 +69,9 @@ function writeFile (fileName, js) {
  */
 function handleSvgFile () {
   const files = getFilesname()
+  if (!fs.existsSync('dist')) {
+    fs.mkdirSync('dist',0744);
+  }
   files.forEach(fileName => {
     const js = parseFile(fileName)
     writeFile(fileName, js)
