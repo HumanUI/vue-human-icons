@@ -30,12 +30,15 @@ function rename () {
   let file = ''
   travel('svg', dirs, function(pathname) {
     var index = pathname.lastIndexOf('\/')
+
     if (index !== -1) {
       var newIndex = pathname.lastIndexOf('\/', index - 1)
+
       if (newIndex  !== -1) {
         folder = pathname.slice(newIndex + 1, index)
         file = pathname.slice(index + 1)
         let len = folder.length
+
         if (file.slice(0 ,len + 1) === folder + '-') {
           let arr = pathname.split('')
           arr.splice(index + 1, len + 1)
