@@ -20,7 +20,7 @@ function travel (dir, callback) {
 }
 
 /**
- * Rename file
+ * Clean file
  */
 
 function clean () {
