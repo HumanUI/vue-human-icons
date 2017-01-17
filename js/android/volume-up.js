@@ -1,3 +1,3 @@
-export default `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+export default `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
 <path d="M4 12v8h5.333l6.667 6.971v-21.943l-6.667 6.971h-5.333zM22 16c0-2.4-1.333-4.525-3.333-5.554v11.040c2-0.96 3.333-3.086 3.333-5.486zM18.667 4v2.811c3.866 1.166 6.667 4.869 6.667 9.189s-2.8 8.023-6.667 9.189v2.811c5.333-1.234 9.333-6.171 9.333-12s-4-10.766-9.333-12z"></path>
 </svg>`
