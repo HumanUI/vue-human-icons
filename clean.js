@@ -26,7 +26,7 @@ function travel (dir, callback) {
 function clean () {
   travel('svg', function(pathname) {
     let text = fs.readFileSync(pathname, 'utf8')
-    let reg = /width=".*?"|height=".*?"|version=".*?"|xmlns=".*?"|xmlns:xlink=".*?"|fill=".*?"/g
+    let reg = /width=".*?"|height=".*?"|version=".*?"|xmlns:xlink=".*?"|fill=".*?"/g
     text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6).replace(reg, '')
     fs.writeFileSync(pathname, text, 'utf8')
     console.log(`${pathname}清洗完成`)
