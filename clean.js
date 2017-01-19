@@ -27,8 +27,12 @@ function clean () {
     if (/.svg$/.test(pathname)) {
       let text = fs.readFileSync(pathname, 'utf8')
       let reg = /width=".*?"|height=".*?"|version=".*?"|xmlns:xlink=".*?"|fill=".*?"/g
-      text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6).replace(reg, '')
-      text = text.replace(/\s{2,}/g, ' ')
+      text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6)
+      .replace(reg, '')
+      .replace(/\s{2,}/g, ' ')
+      .replace(/\>(\s|\n)*?\</g, '>\r  <')
+      .replace(/\>(\s|\n)*?\<(?=animate)|\>(\s|\n)*?\<(?=\/animate)/g, '>\r    <')
+      .replace(/\>(\s|\n)*?\<(?=\/svg)/g, '>\r<')
       fs.writeFileSync(pathname, text, 'utf8')
       console.log(`${pathname}清洗完成`)
     }
