@@ -24,12 +24,14 @@ function travel (dir, callback) {
  */
 function clean () {
   travel('svg', function(pathname) {
-    let text = fs.readFileSync(pathname, 'utf8')
-    let reg = /width=".*?"|height=".*?"|version=".*?"|xmlns:xlink=".*?"|fill=".*?"/g
-    text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6).replace(reg, '')
-    text = text.replace(/\s{2,}/g, ' ')
-    fs.writeFileSync(pathname, text, 'utf8')
-    console.log(`${pathname}清洗完成`)
+    if (/.svg$/.test(pathname)) {
+      let text = fs.readFileSync(pathname, 'utf8')
+      let reg = /width=".*?"|height=".*?"|version=".*?"|xmlns:xlink=".*?"|fill=".*?"/g
+      text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6).replace(reg, '')
+      text = text.replace(/\s{2,}/g, ' ')
+      fs.writeFileSync(pathname, text, 'utf8')
+      console.log(`${pathname}清洗完成`)
+    }
   })
 }
 clean()
