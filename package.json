@@ -1,6 +1,6 @@
 {
-  "name": "human-icons",
-  "version": "1.3.0",
+  "name": "vue-human-icons",
+  "version": "1.4.0",
   "description": "SVG icons for Human UI in Vue2",
   "scripts": {
     "build": "node index.js"
