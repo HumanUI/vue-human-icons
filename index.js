@@ -62,7 +62,7 @@ function check (fileName, fromIndex) {
  */
 function parseFile (fileName) {
   let text = fs.readFileSync(fileName, 'utf8')
-  text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6).replace(/width=".*?"|height=".*?"/g, '')
+  text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6)
   return 'export default `'+text+'`'
 }
 
