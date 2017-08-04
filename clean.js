@@ -26,7 +26,7 @@ function clean () {
   travel('svg', function(pathname) {
     if (/.svg$/.test(pathname)) {
       let text = fs.readFileSync(pathname, 'utf8')
-      let reg = /width=".*?"|height=".*?"|version=".*?"|xmlns:xlink=".*?"|fill=".*?"/g
+      let reg = /id=".*?"|version=".*?"|xmlns:xlink=".*?"|width=".*px?"|height=".*px?"|x=".*px?"|y=".*px?"|enable-background=".*?"|xml:space=".*?"/g
       text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6)
       .replace(reg, '')
       .replace(/\s{2,}/g, ' ')
