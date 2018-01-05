@@ -63,7 +63,8 @@ function check (fileName, fromIndex) {
 function parseFile (fileName) {
   let text = fs.readFileSync(fileName, 'utf8')
   text = text.slice(text.indexOf('\<svg'), text.indexOf('\<\/svg\>') + 6)
-  return 'export default `'+text+'`'
+  text = text.replace(/[\r\n]/g, '')
+  return 'export default \''+text+'\''
 }
 
 /**
@@ -75,12 +76,7 @@ function writeFile (fileName, js) {
   fileName = fileName.replace(/.svg$/, '.js').slice(4)
   check(fileName, 0)
   fs.open(`js/${fileName}`, 'a', function (err, fd) {
-    var writeBuffer = new Buffer(js),
-      offset = 0,
-      len = writeBuffer.length,
-      filePostion = null;
-
-    fs.writeFile(fd, writeBuffer, offset, len, filePostion, function(err, readByte){
+    fs.writeFile(fd, js, err => {
       console.log(`${fileName} 创建成功`)
     })
   })
