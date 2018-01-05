@@ -1,6 +1,6 @@
 {
-  "name": "vue-human-icons",
-  "version": "1.6.0",
+  "name": "@freshes/icons",
+  "version": "2.0.1",
   "description": "SVG icons for Human UI in Vue2",
   "scripts": {
     "build": "node index.js"
@@ -13,5 +13,8 @@
   ],
   "devDependencies": {
     "svgfont2js": "^0.1.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,40 +1,41 @@
-# Human svg icon from iconic
-### Provide two versions, they are SVG and JS string.
+# @freshes/icons
 
-The tool is just designed for vue-human.
+# svg icon from iOS, Android and iconic.
 
 ## Usage
 
 ``` vue
 <template>
   <div>
-    <!-- mn-icon component from vue-human -->
-    <mn-icon :name="iosAt"></mn-icon>
+    <mn-icon :name="atIcon"></mn-icon>
   </div>
 </template>
 
 <script>
-  import iosAt from 'human-icons/js/ios/ios-at'
+  import { btn } from '@humans/btn'
 
   export default {
+    components: {
+      ...btn
+    },
     data () {
       return {
-        iosAt
+        atIcon: require('@freshes/icons/js/ios/ios-at')
       }
     }
   }
 </script>
 ```
 
-## Build
+## Contribute
+
+#### install
 
 ``` bash
+$ yarn install
+```
 
-# Step 1. Install
-yarn install
-
-# Step 2. Run script and to convert svg file to javascript file
-node index.js
-
-# Step 3. Find js files from `./js`
+``` bash
+# Run script and to convert svg file to javascript file
+$ yarn run build
 ```
